@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://java.sun.com/xml/ns/persistence" 
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+
+  <!-- Si on veut utiliser explicitement les tables utilises pour le login.
+       Définition donnée dans l'EJB Init par @DataSourceDefinition.  -->
+  <persistence-unit name="loginPU" transaction-type="JTA">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <!-- Pour WildFly : <provider>org.hibernate.ejb.HibernatePersistence</provider> -->
+    <jta-data-source>java:app/jdbc/login_javaEE8</jta-data-source>
+    <class>fr.rgrin.login.entite.Login</class>
+    <class>fr.rgrin.login.entite.Groupe</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    
+  <properties>
+    <!-- 
+      <property name="javax.persistence.schema-generation.database.action" value="create"/> 
+      <property name="eclipselink.logging.level" value="FINE"/> -->
+
+  </properties>
+       
+  </persistence-unit>
+</persistence>

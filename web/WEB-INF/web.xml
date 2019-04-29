@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+  <context-param>
+    <param-name>javax.faces.PROJECT_STAGE</param-name>
+    <param-value>Production</param-value>
+  </context-param>
+  <context-param>
+    <param-name>fr.unice.EMAIL_JNDI_NAME</param-name>
+    <param-value>java:app/mail/free</param-value>
+  </context-param>
+  
+  <session-config>
+    <session-timeout>
+      30
+    </session-timeout>
+  </session-config>
+  <welcome-file-list>
+    <welcome-file>index.xhtml</welcome-file>
+  </welcome-file-list>
+  
+  <!-- Changer ses informations personnelles si on est connecté. -->
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Informations personnelles</web-resource-name>
+      <url-pattern>/infosPerso/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>**</role-name>
+    </auth-constraint>
+  </security-constraint>
+  
+  <!-- Gestion des questionnaires est réservée aux enseignants. -->
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Gestion questionnaires</web-resource-name>
+      <url-pattern>/question/*</url-pattern>
+      <url-pattern>/questionnaire/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>enseignant</role-name>
+    </auth-constraint>
+  </security-constraint>
+  
+  <!-- Passer un questionnaire est réservé aux enseignants et aux étudiants. -->
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Tests questionnaires</web-resource-name>
+      <url-pattern>/testQuestionnaire/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>enseignant</role-name>
+      <role-name>etudiant</role-name>
+    </auth-constraint>
+  </security-constraint>
+  
+  <!-- Gestion des questionnaires est réservée aux administrateurs -->
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Gestion utilsateurs</web-resource-name>
+      <url-pattern>/admin/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>admin</role-name>
+    </auth-constraint>
+  </security-constraint>
+  
+  <error-page>
+    <exception-type>java.lang.Throwable</exception-type>
+    <location>/erreur.xhtml</location>
+  </error-page>
+  <error-page>
+    <error-code>500</error-code>
+    <location>/erreur.xhtml</location>
+  </error-page>
+  <error-page>
+    <error-code>403</error-code>
+    <location>/forbidden.xhtml</location>
+  </error-page>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/notfound.xhtml</location>
+  </error-page>
+
+ 
+</web-app>
