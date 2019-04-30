@@ -30,9 +30,9 @@ import javax.sql.DataSource;
         name = "java:app/jdbc/login_javaEE8",
         serverName = "localhost",
         portNumber = 1527,
-        user = "toto",
-        password = "toto",
-        databaseName = "login_javaEE8"
+        user = "xxx",
+        password = "yyy",
+        databaseName = "db"
 )
 @Singleton
 @Startup
